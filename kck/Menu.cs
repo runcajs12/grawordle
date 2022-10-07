@@ -9,6 +9,7 @@ namespace kck
 {
     public class Menu
     {
+        
         private int SelectedIndex;
         private string[] options;
         private string Prompt;

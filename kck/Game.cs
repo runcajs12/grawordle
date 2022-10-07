@@ -41,6 +41,7 @@ namespace kck
         }
         private void NewGame()
         {
+
             string test = "test";
             string word;
             Console.WriteLine("Podaj słowo:");
@@ -50,7 +51,15 @@ namespace kck
                 word = Console.ReadLine();
                 if(word != test)
                 {
-                    Console.WriteLine("Nie zgadles~! proboj dalej");
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write(word[0]);
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.Write(word[1]);
+                    
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nNie zgadles~! proboj dalej");
                 }
             }
             while (word != test);
