@@ -1,37 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace kck
+﻿namespace kck
 {
     public class Menu
     {
         
-        private int SelectedIndex;
-        private string[] options;
-        private string Prompt;
-        public Menu(string prompt, string[] options)
+        private int _selectedIndex;
+        private List<string> Options { get; set; }
+        private string Prompt { get; set; }
+        public Menu(string prompt, List<string> options)
         {
-            SelectedIndex = 0;
-            this.options = options;
+            _selectedIndex = 0;
+            Options = options;
             Prompt = prompt;
         }
 
         private void Display()
         {
+            
             Console.WriteLine(Prompt);
-            for(int i=0; i < options.Length; i++)
+            for(var i=0; i < Options.Count; i++)
             {
-                string currentOption = options[i];
-                string arrow;
-                if(i == SelectedIndex)
+                var currentOption = Options[i];
+                var arrow = default(string);
+                if(i == _selectedIndex)
                 {
                     arrow = "->";
-                    Console.ForegroundColor =ConsoleColor.Black;
-                    Console.BackgroundColor= ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = ConsoleColor.White;
                 }
                 else
                 {
@@ -47,30 +41,30 @@ namespace kck
         
         public int Run()
         {
-            ConsoleKey keyPressed;
+            var keyPressed = default(ConsoleKey);
             do
             {
                 Console.SetCursorPosition(0, 0);
                 Display();
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                var keyInfo = Console.ReadKey(true);
                 keyPressed = keyInfo.Key;
 
                 //Update Selected Index based on arrow keys
                 if(keyPressed == ConsoleKey.UpArrow)
                 {
-                    if(!(SelectedIndex ==0))
-                    SelectedIndex--;
+                    if(!(_selectedIndex == 0))
+                    _selectedIndex--;
                 }
                 else if(keyPressed == ConsoleKey.DownArrow)
                 {
-                    if(!(SelectedIndex == options.Length-1))
-                    SelectedIndex++;
+                    if(!(_selectedIndex == Options.Count-1))
+                    _selectedIndex++;
                 }
             }
 
 
             while (keyPressed != ConsoleKey.Enter);
-            return SelectedIndex;
+            return _selectedIndex;
         }
         /*public int length = 5;
         string strzalka = "->";

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace kck
+﻿namespace kck
 {
     internal class Game
     {
@@ -20,11 +11,17 @@ namespace kck
 
         private void RunMainMenu()
         {
-            string prompt = "Witaj w grze!";
-            string[] options = { "Nowa gra", "Zmien liczbe liter", "Stworz wlasne slowo", "Koniec gry" };
-            Menu mainMenu = new Menu(prompt, options);
-            //mainMenu.Display();
-            int selectedIndex = mainMenu.Run();
+            var prompt = "Witaj w grze!";
+            var optionsList = new List<string>()
+            {
+                "Nowa gra", 
+                "Zmien liczbe liter", 
+                "Stworz wlasne slowo", 
+                "Koniec gry"
+            };
+            var mainMenu = new Menu(prompt, optionsList);
+            
+            var selectedIndex = mainMenu.Run();
             switch (selectedIndex)
             {
                 case 0:
@@ -36,14 +33,17 @@ namespace kck
                     break;
                 case 3:
                     break;
+                default:
+                    Console.WriteLine("Błędny wybór");
+                    break;
             }
             
         }
         private void NewGame()
         {
 
-            string test = "test";
-            string word;
+            var test = "test";
+            var word = default(string);
             Console.WriteLine("Podaj słowo:");
             do
             {

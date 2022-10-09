@@ -1,11 +1,9 @@
-﻿using System;
-using System.Data;
-using kck;
+﻿using kck;
 internal class Program
 {
     private static void Main(string[] args)
     {
-        Game myGame = new Game();
+        var myGame = new Game();
         myGame.Start();
         
     }
