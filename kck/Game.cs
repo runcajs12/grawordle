@@ -1,12 +1,13 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace kck
+﻿namespace kck
 {
     internal class Game
     {
 
+        public WordManager WordManager { get; set; } = new WordManager();
+
         public void Start()
         {
+            
             Console.Title = "Wordle";
             RunMainMenu();
         }
@@ -32,6 +33,7 @@ namespace kck
                 case 1:
                     break;
                 case 2:
+                    AddWord();
                     break;
                 case 3:
                     break;
@@ -122,6 +124,14 @@ namespace kck
             }
             Console.WriteLine();
             changeColorDefault();
+        }
+        private void AddWord()
+        {
+            Console.WriteLine("Podaj słowo, które chcesz dodać do bazy");
+
+            var word = Console.ReadLine();
+
+            WordManager.AddWord(word);
         }
     }
 }
