@@ -1,4 +1,6 @@
-﻿namespace kck
+﻿using kck.Enums;
+
+namespace kck
 {
     internal class Game
     {
@@ -49,7 +51,7 @@
         private void NewGame(int _numberofletters)
         {
             Console.Clear();
-            var test = "testy";
+            var test = WordManager.DrawWord();
             var word = default(string);
             Console.WriteLine("Podaj słowo:");
             do
@@ -91,17 +93,11 @@
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public enum LetterStatus
-        {
-                Empty,
-                Wrong,
-                WrongPosition,
-                Correct
-        }
+
         public LetterStatus[] CheckLetters(string _word, string _test)
         {
             var result = new LetterStatus[_test.Length];
-            for(int i = 0; i < _test.Length; i++)
+            for (int i = 0; i < _test.Length; i++)
             {
                 if (_word[i]== _test[i])
                 {

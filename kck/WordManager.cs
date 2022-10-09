@@ -1,8 +1,4 @@
-﻿using System.Data;
-using System.Diagnostics.Tracing;
-using System.Security.Cryptography;
-
-namespace kck
+﻿namespace kck
 {
     public class WordManager
     {
@@ -34,7 +30,14 @@ namespace kck
             {
                 File.AppendAllLines(FileName, new List<string> { name });
             }
-            
+        }
+
+        public string DrawWord()
+        {
+            var random = new Random();
+            int index = random.Next(Words.Count);
+            Console.WriteLine(Words[index].Name.ToString());
+            return Words[index].Name.ToString();
         }
         
 
