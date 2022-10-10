@@ -48,29 +48,39 @@ namespace kck
             }
 
         }
-        private void NewGame(int _numberofletters)
+        private void NewGame(int _numberOfLetters)
         {
             Console.Clear();
-            var test = WordManager.DrawWord();
+            //Tutaj trzeba dorobić przekazywanie parametru numberOfLetters do metody DrawWord i na podstawie tego losowanie słowa z odpowiedniego pliku.
+            //Program się wykłada jak wybierzesz grę w 4 literowe słowa a podasz np 5literowe.
+            var correctWord = WordManager.DrawWord();
             var word = default(string);
             Console.WriteLine("Podaj słowo:");
             do
             {
                 word = Console.ReadLine();
-                var result = CheckLetters(word, test);
-                DisplayResult(result, word);
+                if (word.Length != _numberOfLetters)
+                {
+                    Console.WriteLine("Musisz podać słowo " + _numberOfLetters + " literowe.");
+                }
+                else
+                {
+                    var result = CheckLetters(word, correctWord);
+                    DisplayResult(result, word);
+                }
+
             }
-            while (test!=word);
+            while (correctWord != word);
             Console.WriteLine(@"
-    ____  ____    ____  ______  __ __  _       ____    __  ____    ___  __ 
-   /    ||    \  /    ||      ||  |  || |     /    |  /  ]|    |  /  _]|  |
-  |   __||  D  )|  o  ||      ||  |  || |    |  o  | /  / |__  | /  [_ |  |
-  |  |  ||    / |     ||_|  |_||  |  || |___ |     |/  /  __|  ||    _]|__|
-  |  |_ ||    \ |  _  |  |  |  |  :  ||     ||  _  /   \_/  |  ||   [_  __ 
-  |     ||  .  \|  |  |  |  |  |     ||     ||  |  \     \  `  ||     ||  |
-  |___,_||__|\_||__|__|  |__|   \__,_||_____||__|__|\____|\____j|_____||__|
+                ____  ____    ____  ______  __ __  _       ____    __  ____    ___  __ 
+               /    ||    \  /    ||      ||  |  || |     /    |  /  ]|    |  /  _]|  |
+              |   __||  D  )|  o  ||      ||  |  || |    |  o  | /  / |__  | /  [_ |  |
+              |  |  ||    / |     ||_|  |_||  |  || |___ |     |/  /  __|  ||    _]|__|
+              |  |_ ||    \ |  _  |  |  |  |  :  ||     ||  _  /   \_/  |  ||   [_  __ 
+              |     ||  .  \|  |  |  |  |  |     ||     ||  |  \     \  `  ||     ||  |
+              |___,_||__|\_||__|__|  |__|   \__,_||_____||__|__|\____|\____j|_____||__|
                                                                            
- ");
+             ");
             Console.ReadKey();
             Console.Clear();
             RunMainMenu();
@@ -94,16 +104,16 @@ namespace kck
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public LetterStatus[] CheckLetters(string _word, string _test)
+        public LetterStatus[] CheckLetters(string _word, string correctWord)
         {
-            var result = new LetterStatus[_test.Length];
-            for (int i = 0; i < _test.Length; i++)
+            var result = new LetterStatus[correctWord.Length];
+            for (int i = 0; i < correctWord.Length; i++)
             {
-                if (_word[i]== _test[i])
+                if (_word[i]== correctWord[i])
                 {
                     result[i] = LetterStatus.Correct;
                 }
-                else if (_test.Contains(_word[i])){ 
+                else if (correctWord.Contains(_word[i])){ 
                     result[i] = LetterStatus.WrongPosition;
                 }
                 else
