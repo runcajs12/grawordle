@@ -15,12 +15,12 @@
 
                 foreach (var line in fileLines)
                 {
-                    AddWord(line, false);
+                    SaveWord(line, false);
                 }
             }
         }
         
-        public void AddWord(string name, bool shouldSaveToFile = true)
+        public void SaveWord(string name, bool shouldSaveToFile = true)
         {
             var word = new Word();
             word.Name = name;

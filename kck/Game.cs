@@ -1,10 +1,11 @@
 ﻿using kck.Enums;
+using System;
 
 namespace kck
 {
     internal class Game
     {
-        int numberofletters = 5;
+        int numberofletters = 5; //Domyślna liczba liter w słowie
         public WordManager WordManager { get; set; } = new WordManager();
 
         public void Start()
@@ -149,16 +150,24 @@ namespace kck
         private void AddWord()
         {
             Console.Clear();
-            Console.WriteLine("Podaj słowo, które chcesz dodać do bazy");
-
-            var word = Console.ReadLine();
-            if (word.Length != 4 || word.Length != 5 || word.Length != 6)
+            var word = default(string);
+            
+            do
             {
-                Console.WriteLine("Musisz podać słowo 4, 5 lub 6 literowe");
-                Console.ReadKey();
-                AddWord();
+                Console.Clear();
+                Console.WriteLine("Podaj słowo, które chcesz dodać do bazy");
+                word = Console.ReadLine();
+                if(!(word.Length == 4 || word.Length == 5 || word.Length == 6))
+                {
+                    Console.WriteLine("Musisz podać słowo 4, 5 lub 6 literowe");
+                    Console.ReadKey();
+                }
             }
-            WordManager.AddWord(word);
+            while (!(word.Length == 4 || word.Length == 5 || word.Length == 6));
+
+
+            WordManager.SaveWord(word);
+
             Console.WriteLine("Dodano słowo do bazy");
             Console.ReadKey();
             Console.Clear();
