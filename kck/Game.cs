@@ -114,7 +114,7 @@ namespace kck
                 {
                     result[i] = LetterStatus.Correct;
                 }
-                else if (correctWord.Contains(_word[i])){ 
+                else if (correctWord.Substring(i).Contains(_word[i])){ 
                     result[i] = LetterStatus.WrongPosition;
                 }
                 else
@@ -122,6 +122,7 @@ namespace kck
                     result[i] = LetterStatus.Wrong;
                 }
             }
+            
             return result;
         }
         public void DisplayResult(LetterStatus[] _result, string word)
