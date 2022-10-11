@@ -30,17 +30,23 @@
             {
                 File.AppendAllLines(FileName, new List<string> { name });
             }
+
         }
 
-        public string DrawWord()
+        public string DrawWord(int numberOfLetters)
         {
+            var wordsInChoosenNumberOfLetters = new List<string>();
+            foreach (var word in Words)
+            {
+                if(word.Name.Length == numberOfLetters)
+                {
+                    wordsInChoosenNumberOfLetters.Add(word.Name);
+                }
+            }
             var random = new Random();
-            int index = random.Next(Words.Count);
-            Console.WriteLine(Words[index].Name.ToString());
-            return Words[index].Name.ToString();
+            int index = random.Next(wordsInChoosenNumberOfLetters.Count);
+            Console.WriteLine(wordsInChoosenNumberOfLetters[index]);
+            return wordsInChoosenNumberOfLetters[index];
         }
-        
-
-
     }
 }

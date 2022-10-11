@@ -32,6 +32,7 @@ namespace kck
             {
                 case 0:
                     NewGame(numberofletters);
+                    RunMainMenu();
                     break;
                 case 1:
                     numberofletters = ChangeDifficulty();
@@ -39,6 +40,7 @@ namespace kck
                     break;
                 case 2:
                     AddWord();
+                    RunMainMenu();
                     break;
                 case 3:
                     break;
@@ -51,9 +53,7 @@ namespace kck
         private void NewGame(int _numberOfLetters)
         {
             Console.Clear();
-            //Tutaj trzeba dorobić przekazywanie parametru numberOfLetters do metody DrawWord i na podstawie tego losowanie słowa z odpowiedniego pliku.
-            //Program się wykłada jak wybierzesz grę w 4 literowe słowa a podasz np 5literowe.
-            var correctWord = WordManager.DrawWord();
+            var correctWord = WordManager.DrawWord(_numberOfLetters);
             var word = default(string);
             Console.WriteLine("Podaj słowo:");
             do
@@ -83,7 +83,7 @@ namespace kck
              ");
             Console.ReadKey();
             Console.Clear();
-            RunMainMenu();
+            
             //for(int i = 0; i < test.Length; i++)
             //Console.WriteLine("z tej funkcji wyszlo:" + costam[i]);
 
@@ -148,11 +148,20 @@ namespace kck
         }
         private void AddWord()
         {
+            Console.Clear();
             Console.WriteLine("Podaj słowo, które chcesz dodać do bazy");
 
             var word = Console.ReadLine();
-
+            if (word.Length != 4 || word.Length != 5 || word.Length != 6)
+            {
+                Console.WriteLine("Musisz podać słowo 4, 5 lub 6 literowe");
+                Console.ReadKey();
+                AddWord();
+            }
             WordManager.AddWord(word);
+            Console.WriteLine("Dodano słowo do bazy");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private int ChangeDifficulty()
