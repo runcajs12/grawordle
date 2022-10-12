@@ -108,20 +108,40 @@ namespace kck
         public LetterStatus[] CheckLetters(string _word, string correctWord)
         {
             var result = new LetterStatus[correctWord.Length];
+            var tempcorrectWord = correctWord;
             for (int i = 0; i < correctWord.Length; i++)
             {
-                if (_word[i]== correctWord[i])
+                if (_word[i] == correctWord[i])
                 {
                     result[i] = LetterStatus.Correct;
+                    tempcorrectWord = tempcorrectWord.Substring(0, i) + '`' + tempcorrectWord.Substring(i + 1);
                 }
-                else if (correctWord.Contains(_word[i])){ 
+            }
+            for (int i = 0; i < correctWord.Length; i++)
+                {
+                    if(!(result[i] == LetterStatus.Correct))
+                {
+                    if (tempcorrectWord.Contains(_word[i]))
+                    {
+                        int tempIndex = tempcorrectWord.IndexOf(_word[i]);
+                        result[i] = LetterStatus.WrongPosition;
+                        tempcorrectWord = tempcorrectWord.Substring(0, tempIndex) + '`' + tempcorrectWord.Substring(tempIndex + 1);
+                    }
+                    else
+                    {
+                        result[i] = LetterStatus.Wrong;
+                    }
+                }
+               /* else if (tempcorrectWord.Contains(_word[i])){ 
                     result[i] = LetterStatus.WrongPosition;
                 }
                 else
                 {
                     result[i] = LetterStatus.Wrong;
-                }
+                }*/
+
             }
+            
             return result;
         }
         public void DisplayResult(LetterStatus[] _result, string word)

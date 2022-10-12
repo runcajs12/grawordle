@@ -49,7 +49,6 @@
                 var keyInfo = Console.ReadKey(true);
                 keyPressed = keyInfo.Key;
 
-                //Update Selected Index based on arrow keys
                 if(keyPressed == ConsoleKey.UpArrow)
                 {
                     if(!(_selectedIndex == 0))
