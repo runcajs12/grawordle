@@ -165,10 +165,15 @@ namespace kck
             }
             while (!(word.Length == 4 || word.Length == 5 || word.Length == 6));
 
-
-            WordManager.SaveWord(word);
-
-            Console.WriteLine("Dodano słowo do bazy");
+            if (WordManager.IfWordExist(word))
+            {
+                Console.WriteLine("Podane słowo już istnieje w bazie!");
+            }
+            else
+            {
+                WordManager.SaveWord(word);
+                Console.WriteLine("Dodano słowo do bazy");
+            }
             Console.ReadKey();
             Console.Clear();
         }
