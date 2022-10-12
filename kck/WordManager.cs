@@ -48,5 +48,18 @@
             Console.WriteLine(wordsInChoosenNumberOfLetters[index]);
             return wordsInChoosenNumberOfLetters[index];
         }
+        public bool IfWordExist(string newWord)
+        {
+            var ifWordExist = false;
+            foreach (var word in Words)
+            {
+                if(word.Name == newWord)
+                {
+                    ifWordExist = true;   
+                }
+            }
+
+            return ifWordExist;
+        }
     }
 }
