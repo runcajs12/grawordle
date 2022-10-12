@@ -3,7 +3,7 @@
     public class WordManager
     {
         public List<Word> Words { get; set; }
-        public string FileName { get; set; } = "words.txt";
+        public string FileName { get; set; } = "../../../words.txt";
 
         public WordManager()
         {
