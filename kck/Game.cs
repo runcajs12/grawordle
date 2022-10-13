@@ -5,6 +5,7 @@ namespace kck
 {
     internal class Game
     {
+        int level = 8; //Domyślna liczba prób na zgadnięcie słowa
         int numberofletters = 5; //Domyślna liczba liter w słowie
         public WordManager WordManager { get; set; } = new WordManager();
 
@@ -24,6 +25,7 @@ namespace kck
                 "Nowa gra",
                 "Zmien liczbe liter",
                 "Stworz wlasne slowo",
+                "Zmień poziom trudności",
                 "Koniec gry"
             };
             var mainMenu = new Menu(prompt, optionsList);
@@ -36,7 +38,7 @@ namespace kck
                     RunMainMenu();
                     break;
                 case 1:
-                    numberofletters = ChangeDifficulty();
+                    numberofletters = ChangeNumberOfLetters();
                     RunMainMenu();
                     break;
                 case 2:
@@ -44,6 +46,10 @@ namespace kck
                     RunMainMenu();
                     break;
                 case 3:
+                    level = ChangeLevel();
+                    RunMainMenu();
+                    break;
+                case 4:
                     break;
                 default:
                     Console.WriteLine("Błędny wybór");
@@ -200,7 +206,7 @@ namespace kck
             Console.Clear();
         }
 
-        private int ChangeDifficulty()
+        private int ChangeNumberOfLetters()
         {
             Console.Clear();
             var prompt = "Wybierz ilu literowe słowo chcesz zgadywać:";
@@ -230,6 +236,40 @@ namespace kck
                     break;
             }
 
+        }
+        private int ChangeLevel()
+        {
+            Console.Clear();
+            var prompt = "Wybierz ile chcesz mieć szans na zgadnięcie:";
+            var optionsList = new List<string>()
+            {
+                "Sześć",
+                "Osiem",
+                "Dziesięć",
+                "Bez limitu",
+            };
+            var difficultyMenu = new Menu(prompt, optionsList);
+
+            var selectedIndex = difficultyMenu.Run();
+            switch (selectedIndex)
+            {
+                case 0:
+                    return 6;
+                    break;
+                case 1:
+                    return 8;
+                    break;
+                case 2:
+                    return 10;
+                    break;
+                case 3:
+                    return 0;
+                    break;
+                default:
+                    Console.WriteLine("Błędny wybór");
+                    return 0;
+                    break;
+            }
         }
     }
 }
