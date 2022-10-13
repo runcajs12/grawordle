@@ -1,13 +1,18 @@
 ﻿using kck.Enums;
-using System;
 
 namespace kck
 {
     internal class Game
     {
-        int level = 8; //Domyślna liczba prób na zgadnięcie słowa
-        int numberofletters = 5; //Domyślna liczba liter w słowie
-        public WordManager WordManager { get; set; } = new WordManager();
+        public int Level { get; set; }
+        public int Numberofletters { get; set; }
+        private WordManager WordManager { get; set; } = new WordManager();
+
+        public Game(int level, int numberofletters)
+        {
+            Level = level;
+            Numberofletters = numberofletters;
+        }
 
         public void Start()
         {
@@ -34,11 +39,11 @@ namespace kck
             switch (selectedIndex)
             {
                 case 0:
-                    NewGame(numberofletters);
+                    NewGame(Numberofletters, Level);
                     RunMainMenu();
                     break;
                 case 1:
-                    numberofletters = ChangeNumberOfLetters();
+                    Numberofletters = ChangeNumberOfLetters();
                     RunMainMenu();
                     break;
                 case 2:
@@ -46,7 +51,7 @@ namespace kck
                     RunMainMenu();
                     break;
                 case 3:
-                    level = ChangeLevel();
+                    Level = ChangeLevel();
                     RunMainMenu();
                     break;
                 case 4:
@@ -57,8 +62,9 @@ namespace kck
             }
 
         }
-        private void NewGame(int _numberOfLetters)
+        private void NewGame(int _numberOfLetters, int level)
         {
+            
             Console.Clear();
             var correctWord = WordManager.DrawWord(_numberOfLetters);
             var word = default(string);
@@ -76,19 +82,27 @@ namespace kck
                     var result = CheckLetters(word, correctWord);
                     DisplayResult(result, word);
                 }
-
+                level--;
             }
-            while (correctWord != word);
-            Console.WriteLine(@"
-                ____  ____    ____  ______  __ __  _       ____    __  ____    ___  __ 
-               /    ||    \  /    ||      ||  |  || |     /    |  /  ]|    |  /  _]|  |
-              |   __||  D  )|  o  ||      ||  |  || |    |  o  | /  / |__  | /  [_ |  |
-              |  |  ||    / |     ||_|  |_||  |  || |___ |     |/  /  __|  ||    _]|__|
-              |  |_ ||    \ |  _  |  |  |  |  :  ||     ||  _  /   \_/  |  ||   [_  __ 
-              |     ||  .  \|  |  |  |  |  |     ||     ||  |  \     \  `  ||     ||  |
-              |___,_||__|\_||__|__|  |__|   \__,_||_____||__|__|\____|\____j|_____||__|
+            while (correctWord != word && level > 0);
+            if(correctWord == word)
+            {
+                Console.WriteLine(@"
+                    ____  ____    ____  ______  __ __  _       ____    __  ____    ___  __ 
+                   /    ||    \  /    ||      ||  |  || |     /    |  /  ]|    |  /  _]|  |
+                  |   __||  D  )|  o  ||      ||  |  || |    |  o  | /  / |__  | /  [_ |  |
+                  |  |  ||    / |     ||_|  |_||  |  || |___ |     |/  /  __|  ||    _]|__|
+                  |  |_ ||    \ |  _  |  |  |  |  :  ||     ||  _  /   \_/  |  ||   [_  __ 
+                  |     ||  .  \|  |  |  |  |  |     ||     ||  |  \     \  `  ||     ||  |
+                  |___,_||__|\_||__|__|  |__|   \__,_||_____||__|__|\____|\____j|_____||__|
                                                                            
-             ");
+                 ");
+            }
+            else
+            {
+                Console.WriteLine("Niestety, poległeś...");
+            }
+
             Console.ReadKey();
             Console.Clear();
             
@@ -263,7 +277,7 @@ namespace kck
                     return 10;
                     break;
                 case 3:
-                    return 0;
+                    return 999;
                     break;
                 default:
                     Console.WriteLine("Błędny wybór");

@@ -4,7 +4,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var myGame = new Game();
+        var myGame = new Game(8,5);
         myGame.Start();
 
     }
