@@ -60,6 +60,7 @@ namespace kck
             do
             {
                 word = Console.ReadLine();
+                word = word.ToLower();
                 if (word.Length != _numberOfLetters)
                 {
                     Console.WriteLine("Musisz podać słowo " + _numberOfLetters + " literowe.");
@@ -177,6 +178,7 @@ namespace kck
                 Console.Clear();
                 Console.WriteLine("Podaj słowo, które chcesz dodać do bazy");
                 word = Console.ReadLine();
+                word=word.ToLower();
                 if(!(word.Length == 4 || word.Length == 5 || word.Length == 6))
                 {
                     Console.WriteLine("Musisz podać słowo 4, 5 lub 6 literowe");
