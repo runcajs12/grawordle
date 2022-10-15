@@ -81,10 +81,17 @@ namespace kck
                 {
                     var result = CheckLetters(word, correctWord);
                     DisplayResult(result, word);
+                    if (level != -1)
+                    {
+                        level--;
+                        Console.WriteLine("                  *Pozostała liczba szans: " + level);
+                    }
+                    else
+                        Console.WriteLine();
                 }
-                level--;
+               
             }
-            while (correctWord != word && level > 0);
+            while (correctWord != word && level != 0);
             if(correctWord == word)
             {
                 Console.WriteLine(@"
@@ -101,6 +108,7 @@ namespace kck
             else
             {
                 Console.WriteLine("Niestety, poległeś...");
+                Console.WriteLine("Prawidłowe słowo to " + correctWord);
             }
 
             Console.ReadKey();
@@ -185,8 +193,9 @@ namespace kck
                     Console.Write(word[i]);
                 }
             }
-            Console.WriteLine();
             changeColorDefault();
+            
+            
         }
         private void AddWord()
         {
@@ -277,7 +286,7 @@ namespace kck
                     return 10;
                     break;
                 case 3:
-                    return 999;
+                    return -1;
                     break;
                 default:
                     Console.WriteLine("Błędny wybór");
