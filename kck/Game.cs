@@ -1,4 +1,7 @@
 ﻿using kck.Enums;
+using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace kck
 {
@@ -68,6 +71,8 @@ namespace kck
             Console.Clear();
             var correctWord = WordManager.DrawWord(_numberOfLetters);
             var word = default(string);
+            Stopwatch time = new Stopwatch();
+            time.Start();
             Console.WriteLine("Podaj słowo:");
             do
             {
@@ -94,6 +99,8 @@ namespace kck
             while (correctWord != word && level != 0);
             if(correctWord == word)
             {
+                time.Stop();
+                var ts = Math.Round(time.Elapsed.TotalSeconds, 2);
                 Console.WriteLine(@"
                     ____  ____    ____  ______  __ __  _       ____    __  ____    ___  __ 
                    /    ||    \  /    ||      ||  |  || |     /    |  /  ]|    |  /  _]|  |
@@ -104,11 +111,12 @@ namespace kck
                   |___,_||__|\_||__|__|  |__|   \__,_||_____||__|__|\____|\____j|_____||__|
                                                                            
                  ");
+                Console.WriteLine("Twój czas: " +  ts.ToString() + "s") ;
             }
             else
             {
                 Console.WriteLine("Niestety, poległeś...");
-                Console.WriteLine("Prawidłowe słowo to " + correctWord);
+                Console.WriteLine("Prawidłowe słowo to " + correctWord );
             }
 
             Console.ReadKey();
