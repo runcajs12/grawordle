@@ -51,13 +51,17 @@
 
                 if(keyPressed == ConsoleKey.UpArrow)
                 {
-                    if(!(_selectedIndex == 0))
-                    _selectedIndex--;
+                    if (!(_selectedIndex == 0))
+                        _selectedIndex--;
+                    else
+                        _selectedIndex = Options.Count - 1;
                 }
                 else if(keyPressed == ConsoleKey.DownArrow)
                 {
-                    if(!(_selectedIndex == Options.Count-1))
-                    _selectedIndex++;
+                    if (!(_selectedIndex == Options.Count - 1))
+                        _selectedIndex++;
+                    else
+                        _selectedIndex = 0;
                 }
             }
 
