@@ -6,7 +6,8 @@
         private int _selectedIndex;
         private List<string> Options { get; set; }
         private string Prompt { get; set; }
-        public Menu(string prompt, List<string> options)
+        public Menu(string prompt, List<string> options)//Konstruktor menu pobiera napis jaki ma się znajdować
+                                                        //nad menu oraz opcje możliwe do wyboru
         {
             _selectedIndex = 0;
             Options = options;
@@ -15,26 +16,28 @@
 
         private void Display()
         {
-            
+            int x = 5;
+            Console.SetCursorPosition((Console.WindowWidth - Prompt.Length) / 2, Console.CursorTop+x);
             Console.WriteLine(Prompt);
             for(var i=0; i < Options.Count; i++)
             {
                 var currentOption = Options[i];
-                var arrow = default(string);
+                
                 if(i == _selectedIndex)
                 {
-                    arrow = "->";
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    
+                    Console.ForegroundColor = ConsoleColor.Black;//podświetlanie zaznaczonej opcji
                     Console.BackgroundColor = ConsoleColor.White;
                 }
                 else
                 {
-                    arrow = "  ";
+                    
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+                Console.SetCursorPosition((Console.WindowWidth - Options[0].Length) / 2, Console.CursorTop);
+                Console.WriteLine(currentOption);
                 
-                Console.WriteLine(arrow + currentOption);
             }
             Console.ResetColor();
         }
@@ -49,7 +52,7 @@
                 var keyInfo = Console.ReadKey(true);
                 keyPressed = keyInfo.Key;
 
-                if(keyPressed == ConsoleKey.UpArrow)
+                if(keyPressed == ConsoleKey.UpArrow)//sterowanie menu za pomocą strzałek
                 {
                     if (!(_selectedIndex == 0))
                         _selectedIndex--;
@@ -66,7 +69,7 @@
             }
 
 
-            while (keyPressed != ConsoleKey.Enter);
+            while (keyPressed != ConsoleKey.Enter);//kliknięcie enter zwraca wybraną opcję
             return _selectedIndex;
         }
     }

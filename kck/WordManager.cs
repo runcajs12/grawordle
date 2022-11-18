@@ -19,7 +19,31 @@
                 }
             }
         }
-        
+        public void RemoveWord(int index)
+        {
+            Words.RemoveAt(index);
+            StreamWriter sw = new StreamWriter(FileName, false);
+            foreach(var line in Words)
+            {
+                sw.WriteLine(line.Name);
+            }
+            sw.Close();      
+        }
+        public bool canRemove(int length)
+        {
+            int counter = 0;
+
+            foreach (var word in Words)
+            {
+                if (word.Name.Length == length)
+                {
+                    counter++;
+                }
+            }
+            if (counter > 1)
+                return true;
+            else return false;
+        }
         public void SaveWord(string name, bool shouldSaveToFile = true)
         {
             var word = new Word();
@@ -33,6 +57,7 @@
 
         }
 
+
         public string DrawWord(int numberOfLetters)
         {
             var wordsInChoosenNumberOfLetters = new List<string>();
@@ -45,7 +70,7 @@
             }
             var random = new Random();
             int index = random.Next(wordsInChoosenNumberOfLetters.Count);
-            Console.WriteLine(wordsInChoosenNumberOfLetters[index]);
+            //Console.WriteLine(wordsInChoosenNumberOfLetters[index]);
             return wordsInChoosenNumberOfLetters[index];
         }
         public bool IfWordExist(string newWord)
@@ -61,5 +86,7 @@
 
             return ifWordExist;
         }
+
+        
     }
 }

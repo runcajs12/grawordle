@@ -1,6 +1,4 @@
-domy
-domek
-kokos
-kamień
-kamyk
 kawa
+żołądź
+domek
+adam
